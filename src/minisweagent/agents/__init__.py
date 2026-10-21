@@ -12,7 +12,7 @@ _AGENT_MAPPING = {
 
 
 def get_agent_class(spec: str) -> type[Agent]:
-    full_path = _AGENT_MAPPING.get(spec, spec)
+    full_path = _AGENT_MAPPING.get(spec, spec) # 这个设计很灵活，同时支持 'default'/'interactive'两个简写方式，能获取到预先设置的值，也可以传入自定义的Agent类，这样找不到，就默认是传入的路径啦。
     try:
         module_name, class_name = full_path.rsplit(".", 1)
         module = importlib.import_module(module_name)
