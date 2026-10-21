@@ -38,5 +38,7 @@ def get_agent_class(spec: str) -> type[Agent]:
 
 def get_agent(model: Model, env: Environment, config: dict, *, default_type: str = "") -> Agent:
     config = copy.deepcopy(config)
+    """ 从 config 中提取出 agent_class 的值，并把这个 key 从 config 中删掉 """
     agent_class = get_agent_class(config.pop("agent_class", default_type))
+    """ 这里是在做Agent类的实例化，就是在new一个对象。**config 是字典解包，变成多个参数传给这个类的构造函数，Python中是__init__函数。 """
     return agent_class(model, env, **config)
