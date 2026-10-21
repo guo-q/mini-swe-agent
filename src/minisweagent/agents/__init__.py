@@ -21,6 +21,9 @@ def get_agent_class(spec: str) -> type[Agent]:
         这是一个常见经典写法，从右开始分割，目的是从 '模块.模块.类名'中分离出 【模块路径】和【类名】
         """
         module_name, class_name = full_path.rsplit(".", 1)
+        """
+        这里是动态导入一个模块，根据不同的参数，把对应的模块导入到当前代码中
+        """
         module = importlib.import_module(module_name)
         return getattr(module, class_name)
     except (ValueError, ImportError, AttributeError):
