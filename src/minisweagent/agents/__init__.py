@@ -25,6 +25,10 @@ def get_agent_class(spec: str) -> type[Agent]:
         这里是动态导入一个模块，根据不同的参数，把对应的模块导入到当前代码中
         """
         module = importlib.import_module(module_name)
+        """
+        这个是动态获取对象中的一个参数，getattr(对象, 属性字符串)，这里是获取到这个模块中的某个类，把这个类返回，这里返回的是类(Type)，并不是实例（这个应该很好理解，这里肯定还没创建对象）
+        返回的类型比如是 AgentClass，那AgentClass()就是在创建对象啦，和java里的差不多，就是不需要new这个关键字。
+        """
         return getattr(module, class_name)
     except (ValueError, ImportError, AttributeError):
         msg = f"Unknown agent type: {spec} (resolved to {full_path}, available: {_AGENT_MAPPING})"
