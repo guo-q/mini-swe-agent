@@ -12,6 +12,9 @@ _AGENT_MAPPING = {
 
 
 def get_agent_class(spec: str) -> type[Agent]:
+    """
+    这里的设计是既支持短短写简称 default/interactive，也支持完整的自定义Agent类路径。后面的spec是默认值，如果传入的是自定义类路径，跟定就get不到，会直接作为默认值返回。
+    """
     full_path = _AGENT_MAPPING.get(spec, spec)
     try:
         module_name, class_name = full_path.rsplit(".", 1)
