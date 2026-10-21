@@ -17,6 +17,9 @@ def get_agent_class(spec: str) -> type[Agent]:
     """
     full_path = _AGENT_MAPPING.get(spec, spec)
     try:
+        """
+        这是一个常见经典写法，从右开始分割，目的是从 '模块.模块.类名'中分离出 【模块路径】和【类名】
+        """
         module_name, class_name = full_path.rsplit(".", 1)
         module = importlib.import_module(module_name)
         return getattr(module, class_name)
